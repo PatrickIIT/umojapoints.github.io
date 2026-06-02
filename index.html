@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Umoja Points — Product Roadmap & Business Model</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green-dark: #04342C;
+    --green-mid: #0F6E56;
+    --green-main: #1D9E75;
+    --green-light: #5DCAA5;
+    --green-pale: #E1F5EE;
+    --gold: #C9973A;
+    --gold-light: #FAC775;
+    --gold-pale: #FAEEDA;
+    --navy: #042C53;
+    --navy-mid: #185FA5;
+    --cream: #F7F5F0;
+    --warm-white: #FDFCF9;
+    --ink: #1A1A18;
+    --ink-mid: #3D3D38;
+    --ink-light: #7A7A72;
+    --border: rgba(26,26,24,0.1);
+    --border-strong: rgba(26,26,24,0.2);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--warm-white);
+    color: var(--ink);
+    line-height: 1.6;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(253,252,249,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 0.5px solid var(--border);
+    padding: 0 3rem;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 56px;
+  }
+  .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+  .nav-star { width: 28px; height: 28px; background: var(--green-main); border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+  .nav-star svg { width: 14px; height: 14px; }
+  .nav-brand { font-family: 'DM Serif Display', serif; font-size: 15px; color: var(--ink); }
+  .nav-links { display: flex; gap: 2rem; }
+  .nav-links a { font-size: 12px; font-weight: 500; color: var(--ink-light); text-decoration: none; letter-spacing: 0.06em; text-transform: uppercase; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--green-main); }
+  .nav-badge { font-size: 11px; background: var(--green-main); color: white; padding: 3px 10px; border-radius: 20px; font-weight: 500; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    background: var(--green-dark);
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 8rem 3rem 5rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-grid {
+    position: absolute; inset: 0; opacity: 0.04;
+    background-image: linear-gradient(var(--green-light) 1px, transparent 1px),
+                      linear-gradient(90deg, var(--green-light) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(255,255,255,0.08);
+    border: 0.5px solid rgba(255,255,255,0.15);
+    color: var(--green-light);
+    font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 6px 14px; border-radius: 20px;
+    margin-bottom: 2.5rem;
+    width: fit-content;
+  }
+  .hero h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(3.5rem, 7vw, 6.5rem);
+    color: white;
+    line-height: 1.0;
+    margin-bottom: 0.5rem;
+  }
+  .hero h1 em { color: var(--gold-light); font-style: italic; }
+  .hero-sub {
+    font-size: 18px; color: rgba(255,255,255,0.55);
+    max-width: 560px; margin: 2rem 0 3rem;
+    font-weight: 300;
+  }
+  .hero-stats {
+    display: flex; gap: 3rem; flex-wrap: wrap;
+    border-top: 0.5px solid rgba(255,255,255,0.1);
+    padding-top: 2.5rem;
+  }
+  .hero-stat-num { font-family: 'DM Serif Display', serif; font-size: 2.8rem; color: white; }
+  .hero-stat-label { font-size: 12px; color: rgba(255,255,255,0.45); letter-spacing: 0.05em; text-transform: uppercase; margin-top: 2px; }
+  .hero-scroll {
+    position: absolute; bottom: 2rem; right: 3rem;
+    font-size: 11px; color: rgba(255,255,255,0.3);
+    letter-spacing: 0.08em; text-transform: uppercase;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .hero-scroll::before { content: ''; width: 40px; height: 0.5px; background: rgba(255,255,255,0.2); }
+
+  /* SECTIONS */
+  section { padding: 6rem 3rem; }
+  section:nth-child(even) { background: var(--cream); }
+  .section-label {
+    font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--green-main); margin-bottom: 0.75rem;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .section-label::after { content: ''; flex: 1; height: 0.5px; background: var(--green-main); opacity: 0.3; }
+  h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    color: var(--ink);
+    line-height: 1.15;
+    margin-bottom: 1rem;
+  }
+  .section-intro { font-size: 16px; color: var(--ink-light); max-width: 560px; margin-bottom: 3rem; font-weight: 300; }
+
+  /* VISION BOX */
+  .vision-box {
+    background: var(--green-dark);
+    border-radius: 16px;
+    padding: 3rem;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 3rem;
+    align-items: center;
+  }
+  .vision-quote {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.7rem; color: white; line-height: 1.35;
+  }
+  .vision-quote em { color: var(--gold-light); font-style: italic; }
+  .vision-pillars { display: flex; flex-direction: column; gap: 1rem; }
+  .pillar {
+    background: rgba(255,255,255,0.06);
+    border: 0.5px solid rgba(255,255,255,0.1);
+    border-radius: 10px;
+    padding: 1rem 1.25rem;
+    display: flex; align-items: center; gap: 1rem;
+  }
+  .pillar-icon { width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 18px; }
+  .pillar-title { font-size: 13px; font-weight: 500; color: white; }
+  .pillar-desc { font-size: 12px; color: rgba(255,255,255,0.45); margin-top: 1px; }
+
+  /* ECOSYSTEM */
+  .ecosystem-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;
+  }
+  .eco-card {
+    background: white;
+    border: 0.5px solid var(--border);
+    border-radius: 14px;
+    padding: 1.75rem;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .eco-card:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(0,0,0,0.07); }
+  .eco-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  }
+  .eco-card.earn::before { background: var(--green-main); }
+  .eco-card.redeem::before { background: var(--gold); }
+  .eco-card.connect::before { background: var(--navy-mid); }
+  .eco-card-type { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 600; margin-bottom: 1rem; }
+  .eco-card.earn .eco-card-type { color: var(--green-main); }
+  .eco-card.redeem .eco-card-type { color: var(--gold); }
+  .eco-card.connect .eco-card-type { color: var(--navy-mid); }
+  .eco-card h3 { font-family: 'DM Serif Display', serif; font-size: 1.4rem; margin-bottom: 0.75rem; color: var(--ink); }
+  .eco-card p { font-size: 13px; color: var(--ink-light); line-height: 1.6; margin-bottom: 1.25rem; }
+  .action-list { list-style: none; }
+  .action-list li {
+    font-size: 12px; padding: 6px 0;
+    border-bottom: 0.5px solid var(--border);
+    display: flex; justify-content: space-between; align-items: center;
+    color: var(--ink-mid);
+  }
+  .action-list li:last-child { border-bottom: none; }
+  .pts { font-family: 'DM Mono', monospace; font-size: 11px; font-weight: 500; }
+  .pts.earn { color: var(--green-mid); background: var(--green-pale); padding: 2px 7px; border-radius: 4px; }
+  .pts.redeem { color: #7A4F00; background: var(--gold-pale); padding: 2px 7px; border-radius: 4px; }
+
+  /* ROADMAP */
+  .roadmap { position: relative; }
+  .roadmap-line {
+    position: absolute; left: 120px; top: 0; bottom: 0;
+    width: 1px; background: var(--border-strong);
+  }
+  .phase {
+    display: grid; grid-template-columns: 120px 1fr; gap: 2.5rem;
+    margin-bottom: 3rem; position: relative;
+  }
+  .phase-time {
+    text-align: right; padding-top: 6px;
+    font-size: 12px; color: var(--ink-light);
+    font-weight: 500; letter-spacing: 0.03em;
+  }
+  .phase-dot {
+    position: absolute; left: 113px; top: 8px;
+    width: 15px; height: 15px; border-radius: 50%;
+    border: 2px solid white; z-index: 1;
+  }
+  .phase-1 .phase-dot { background: var(--green-main); }
+  .phase-2 .phase-dot { background: var(--gold); }
+  .phase-3 .phase-dot { background: var(--navy-mid); }
+  .phase-4 .phase-dot { background: var(--ink-mid); }
+  .phase-content {
+    background: white; border: 0.5px solid var(--border);
+    border-radius: 14px; padding: 1.75rem;
+  }
+  .phase-header { display: flex; align-items: center; gap: 12px; margin-bottom: 1rem; }
+  .phase-badge {
+    font-size: 10px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 3px 10px; border-radius: 20px;
+  }
+  .phase-1 .phase-badge { background: var(--green-pale); color: var(--green-mid); }
+  .phase-2 .phase-badge { background: var(--gold-pale); color: #7A4F00; }
+  .phase-3 .phase-badge { background: #E6F1FB; color: var(--navy-mid); }
+  .phase-4 .phase-badge { background: #F1EFE8; color: var(--ink-mid); }
+  .phase-title { font-family: 'DM Serif Display', serif; font-size: 1.3rem; color: var(--ink); }
+  .phase-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 1rem; }
+  .phase-col-label { font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-light); margin-bottom: 0.5rem; font-weight: 600; }
+  .phase-items { list-style: none; }
+  .phase-items li { font-size: 13px; color: var(--ink-mid); padding: 4px 0; display: flex; align-items: flex-start; gap: 8px; }
+  .phase-items li::before { content: '—'; color: var(--border-strong); flex-shrink: 0; margin-top: 1px; }
+  .phase-kpi {
+    margin-top: 1.25rem; padding-top: 1.25rem;
+    border-top: 0.5px solid var(--border);
+    display: flex; gap: 2rem; flex-wrap: wrap;
+  }
+  .kpi-item { }
+  .kpi-num { font-family: 'DM Mono', monospace; font-size: 1.1rem; font-weight: 500; color: var(--ink); }
+  .kpi-label { font-size: 11px; color: var(--ink-light); margin-top: 1px; }
+
+  /* BUSINESS MODEL */
+  .biz-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+  .biz-card {
+    background: white; border: 0.5px solid var(--border);
+    border-radius: 14px; padding: 2rem;
+  }
+  .biz-card.featured {
+    background: var(--green-dark); border-color: var(--green-dark);
+    grid-column: span 2;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: center;
+  }
+  .biz-card h3 { font-family: 'DM Serif Display', serif; font-size: 1.25rem; margin-bottom: 0.5rem; }
+  .biz-card.featured h3 { color: white; }
+  .biz-card.featured p { color: rgba(255,255,255,0.5); font-size: 14px; }
+  .biz-desc { font-size: 13px; color: var(--ink-light); margin-bottom: 1.25rem; }
+  .revenue-streams { }
+  .stream {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 8px 0; border-bottom: 0.5px solid var(--border); font-size: 13px;
+  }
+  .stream:last-child { border-bottom: none; }
+  .stream-name { color: var(--ink-mid); }
+  .stream-amount { font-family: 'DM Mono', monospace; font-size: 12px; font-weight: 500; color: var(--green-mid); }
+  .revenue-total {
+    margin-top: 1rem; padding: 0.75rem 1rem;
+    background: var(--green-pale); border-radius: 8px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .revenue-total-label { font-size: 12px; font-weight: 500; color: var(--green-dark); }
+  .revenue-total-num { font-family: 'DM Mono', monospace; font-size: 1.1rem; font-weight: 500; color: var(--green-dark); }
+  .sponsor-tiers { display: flex; flex-direction: column; gap: 0.75rem; }
+  .tier {
+    border-radius: 8px; padding: 0.75rem 1rem;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .tier.gold { background: var(--gold-pale); }
+  .tier.silver { background: #F1F3F5; }
+  .tier.bronze { background: var(--cream); }
+  .tier-name { font-size: 13px; font-weight: 500; }
+  .tier.gold .tier-name { color: #7A4F00; }
+  .tier.silver .tier-name { color: #3D4F5C; }
+  .tier.bronze .tier-name { color: var(--ink-mid); }
+  .tier-val { font-family: 'DM Mono', monospace; font-size: 12px; font-weight: 500; }
+  .tier-perks { font-size: 11px; color: var(--ink-light); margin-top: 2px; }
+
+  /* STAKEHOLDERS */
+  .stake-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+  .stake-card {
+    background: white; border: 0.5px solid var(--border);
+    border-radius: 14px; padding: 1.75rem;
+    position: relative;
+  }
+  .stake-num {
+    position: absolute; top: 1.5rem; right: 1.5rem;
+    font-family: 'DM Serif Display', serif;
+    font-size: 3rem; color: var(--border);
+    line-height: 1;
+  }
+  .stake-card h3 { font-family: 'DM Serif Display', serif; font-size: 1.15rem; margin-bottom: 0.5rem; }
+  .stake-card p { font-size: 13px; color: var(--ink-light); line-height: 1.6; margin-bottom: 1rem; }
+  .stake-gets { list-style: none; }
+  .stake-gets li { font-size: 12px; color: var(--ink-mid); padding: 3px 0; display: flex; gap: 7px; }
+  .stake-gets li::before { content: '✓'; color: var(--green-main); font-weight: 600; flex-shrink: 0; }
+
+  /* TECH */
+  .tech-stack {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px;
+    background: var(--border);
+    border-radius: 14px; overflow: hidden;
+    border: 0.5px solid var(--border);
+  }
+  .tech-layer {
+    background: white; padding: 1.5rem;
+  }
+  .tech-layer-label { font-size: 10px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-light); margin-bottom: 0.75rem; }
+  .tech-layer h4 { font-size: 14px; font-weight: 500; color: var(--ink); margin-bottom: 0.5rem; }
+  .tech-list { list-style: none; }
+  .tech-list li { font-size: 12px; color: var(--ink-light); padding: 3px 0; }
+
+  /* RISK */
+  .risk-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+  .risk-card {
+    border-radius: 12px; padding: 1.25rem 1.5rem;
+    border-left: 3px solid;
+  }
+  .risk-card.high { border-color: #E24B4A; background: #FCEBEB; }
+  .risk-card.med { border-color: #EF9F27; background: #FAEEDA; }
+  .risk-card.low { border-color: var(--green-main); background: var(--green-pale); }
+  .risk-label { font-size: 10px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 0.4rem; }
+  .risk-card.high .risk-label { color: #A32D2D; }
+  .risk-card.med .risk-label { color: #854F0B; }
+  .risk-card.low .risk-label { color: var(--green-mid); }
+  .risk-title { font-size: 14px; font-weight: 500; color: var(--ink); margin-bottom: 0.4rem; }
+  .risk-mitigation { font-size: 12px; color: var(--ink-light); }
+
+  /* FOOTER */
+  footer {
+    background: var(--green-dark); padding: 4rem 3rem;
+    text-align: center;
+  }
+  footer p { color: rgba(255,255,255,0.3); font-size: 12px; margin-top: 1rem; }
+  .footer-logo { font-family: 'DM Serif Display', serif; font-size: 2rem; color: white; margin-bottom: 0.5rem; }
+  .footer-logo em { color: var(--gold-light); font-style: italic; }
+  .footer-tagline { color: rgba(255,255,255,0.4); font-size: 14px; font-weight: 300; letter-spacing: 0.03em; }
+
+  @media (max-width: 768px) {
+    nav { padding: 0 1.5rem; }
+    .nav-links { display: none; }
+    section { padding: 4rem 1.5rem; }
+    .hero { padding: 6rem 1.5rem 4rem; }
+    .vision-box, .ecosystem-grid, .phase-grid, .biz-grid, .stake-grid, .tech-stack { grid-template-columns: 1fr; }
+    .biz-card.featured { grid-column: span 1; }
+    .roadmap-line { left: 0; display: none; }
+    .phase { grid-template-columns: 1fr; }
+    .phase-time { text-align: left; }
+    .phase-dot { display: none; }
+    .risk-grid { grid-template-columns: 1fr; }
+    .hero-stats { gap: 2rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="#">
+    <div class="nav-star">
+      <svg viewBox="0 0 20 20" fill="none"><polygon points="10,2 12.5,8 19,8 14,12.5 16,19 10,15 4,19 6,12.5 1,8 7.5,8" fill="white"/></svg>
+    </div>
+    <span class="nav-brand">Umoja Points</span>
+  </a>
+  <div class="nav-links">
+    <a href="#vision">Vision</a>
+    <a href="#ecosystem">Ecosystem</a>
+    <a href="#roadmap">Roadmap</a>
+    <a href="#business">Business Model</a>
+    <a href="#tech">Technology</a>
+  </div>
+  <span class="nav-badge">Confidential</span>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-tag">
+    <svg width="8" height="8" viewBox="0 0 8 8" fill="currentColor"><circle cx="4" cy="4" r="4"/></svg>
+    Product Roadmap & Business Model — 2025–2028
+  </div>
+  <h1>Umoja<br><em>Points</em></h1>
+  <p class="hero-sub">Tanzania's first national youth loyalty economy — turning civic participation into real economic opportunity, across both sides of the Union.</p>
+  <div class="hero-stats">
+    <div>
+      <div class="hero-stat-num">12M+</div>
+      <div class="hero-stat-label">Youth aged 15–35 in Tanzania</div>
+    </div>
+    <div>
+      <div class="hero-stat-num">60yrs</div>
+      <div class="hero-stat-label">Of Union with no youth engagement system</div>
+    </div>
+    <div>
+      <div class="hero-stat-num">$0</div>
+      <div class="hero-stat-label">Government cost — fully sponsor-funded</div>
+    </div>
+    <div>
+      <div class="hero-stat-num">#1</div>
+      <div class="hero-stat-label">First of its kind in East Africa</div>
+    </div>
+  </div>
+  <div class="hero-scroll">Scroll to explore</div>
+</div>
+
+<!-- VISION -->
+<section id="vision">
+  <div class="section-label">01 — Vision</div>
+  <h2>The idea in full</h2>
+  <p class="section-intro">A national points system — like airline miles, but for being Tanzanian — where youth on both sides of the Union earn rewards by doing things that matter.</p>
+  <div class="vision-box">
+    <div>
+      <div class="vision-quote">"Youth don't need to <em>care</em> about the Union to join — they join for the concert ticket, and accidentally discover what the Union means."</div>
+    </div>
+    <div class="vision-pillars">
+      <div class="pillar">
+        <div class="pillar-icon" style="background:rgba(29,158,117,0.2);">🎯</div>
+        <div>
+          <div class="pillar-title">Burudani (Entertainment)</div>
+          <div class="pillar-desc">Concerts, festivals, streaming — the hook that gets youth in the door</div>
+        </div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-icon" style="background:rgba(201,151,58,0.2);">💼</div>
+        <div>
+          <div class="pillar-title">Ajira (Employment)</div>
+          <div class="pillar-desc">Fast-track hiring, internships, cross-Union job placements</div>
+        </div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-icon" style="background:rgba(24,95,165,0.2);">🎓</div>
+        <div>
+          <div class="pillar-title">Elimu (Education)</div>
+          <div class="pillar-desc">HESLB top-ups, exam fee waivers, skills training credits</div>
+        </div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-icon" style="background:rgba(255,255,255,0.08);">🤝</div>
+        <div>
+          <div class="pillar-title">Muungano (Union Identity)</div>
+          <div class="pillar-desc">The invisible thread binding all three — civic pride as a product benefit</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ECOSYSTEM -->
+<section id="ecosystem">
+  <div class="section-label">02 — Product Ecosystem</div>
+  <h2>How points flow</h2>
+  <p class="section-intro">Youth earn by doing civic actions, accumulate in a national wallet, and redeem for real rewards. Simple to explain. Powerful at scale.</p>
+  <div class="ecosystem-grid">
+    <div class="eco-card earn">
+      <div class="eco-card-type">Earn</div>
+      <h3>Civic Actions</h3>
+      <p>Every action that strengthens the Union — education, work, environment, culture — is worth points. VPO defines the menu. Partners verify completion.</p>
+      <ul class="action-list">
+        <li><span>Complete Union history course</span><span class="pts earn">+50 pts</span></li>
+        <li><span>Cross-Union internship placement</span><span class="pts earn">+500 pts</span></li>
+        <li><span>Attend Muungano hackathon</span><span class="pts earn">+200 pts</span></li>
+        <li><span>Conservation volunteer day</span><span class="pts earn">+150 pts</span></li>
+        <li><span>Enroll in vocational training</span><span class="pts earn">+100 pts</span></li>
+        <li><span>Share verified VPO content</span><span class="pts earn">+10 pts</span></li>
+        <li><span>Register a cross-Union business</span><span class="pts earn">+300 pts</span></li>
+        <li><span>Vote in Union committee survey</span><span class="pts earn">+25 pts</span></li>
+      </ul>
+    </div>
+    <div class="eco-card connect">
+      <div class="eco-card-type">Platform</div>
+      <h3>Umoja Wallet</h3>
+      <p>A national digital wallet tied to Tanzania's national ID (NIDA). Works across Mainland and Zanzibar. Mobile-first. No smartphone required — USSD fallback built in.</p>
+      <ul class="action-list">
+        <li><span>NIDA-verified identity</span><span class="pts earn" style="background:#E6F1FB;color:#185FA5;">Core</span></li>
+        <li><span>Real-time points balance</span><span class="pts earn" style="background:#E6F1FB;color:#185FA5;">Core</span></li>
+        <li><span>Cross-Union portability</span><span class="pts earn" style="background:#E6F1FB;color:#185FA5;">Core</span></li>
+        <li><span>USSD + app + web access</span><span class="pts earn" style="background:#E6F1FB;color:#185FA5;">Core</span></li>
+        <li><span>Employer verification API</span><span class="pts earn" style="background:#E6F1FB;color:#185FA5;">Phase 2</span></li>
+        <li><span>Analytics dashboard (VPO)</span><span class="pts earn" style="background:#E6F1FB;color:#185FA5;">Phase 2</span></li>
+        <li><span>AI job matching engine</span><span class="pts earn" style="background:#E6F1FB;color:#185FA5;">Phase 3</span></li>
+        <li><span>Open API for partners</span><span class="pts earn" style="background:#E6F1FB;color:#185FA5;">Phase 3</span></li>
+      </ul>
+    </div>
+    <div class="eco-card redeem">
+      <div class="eco-card-type">Redeem</div>
+      <h3>Real Rewards</h3>
+      <p>Youth redeem points for things they already want. Sponsors fund the rewards — government pays nothing. VPO acts as the platform authority that makes redemption trustworthy.</p>
+      <ul class="action-list">
+        <li><span>Concert / festival tickets</span><span class="pts redeem">500 pts</span></li>
+        <li><span>Fast-track job interview</span><span class="pts redeem">300 pts</span></li>
+        <li><span>Ferry Dar ↔ Zanzibar subsidy</span><span class="pts redeem">200 pts</span></li>
+        <li><span>HESLB loan top-up voucher</span><span class="pts redeem">1,000 pts</span></li>
+        <li><span>Streaming subscription (1 mo)</span><span class="pts redeem">150 pts</span></li>
+        <li><span>Startup accelerator access</span><span class="pts redeem">2,000 pts</span></li>
+        <li><span>Mobile data bundle</span><span class="pts redeem">80 pts</span></li>
+        <li><span>Exam fee waiver (voucher)</span><span class="pts redeem">600 pts</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ROADMAP -->
+<section id="roadmap" style="background:var(--cream);">
+  <div class="section-label">03 — Product Roadmap</div>
+  <h2>Four phases to scale</h2>
+  <p class="section-intro">From pilot to Pan-African model in 36 months. Each phase is self-funding — sponsors pay before the next phase begins.</p>
+  <div class="roadmap">
+    <div class="roadmap-line"></div>
+
+    <div class="phase phase-1">
+      <div class="phase-time">Months<br>1–6</div>
+      <div class="phase-dot"></div>
+      <div class="phase-content">
+        <div class="phase-header">
+          <span class="phase-badge">Phase 1</span>
+          <span class="phase-title">Foundation — Build & Pilot</span>
+        </div>
+        <p style="font-size:13px;color:var(--ink-light);margin-bottom:1rem;">Dar es Salaam + Zanzibar Town only. Controlled cohort of 10,000 youth. Prove the engagement loop before scaling.</p>
+        <div class="phase-grid">
+          <div>
+            <div class="phase-col-label">Build</div>
+            <ul class="phase-items">
+              <li>USSD wallet (works on any phone)</li>
+              <li>NIDA integration for identity verification</li>
+              <li>5 earn actions live (courses, events, volunteering)</li>
+              <li>3 redeem categories (entertainment, transport, data)</li>
+              <li>VPO admin dashboard</li>
+              <li>Pilot with 3 sponsor partners</li>
+            </ul>
+          </div>
+          <div>
+            <div class="phase-col-label">Measure</div>
+            <ul class="phase-items">
+              <li>Registration rate among target cohort</li>
+              <li>Weekly active earners (WAE)</li>
+              <li>First-redemption time</li>
+              <li>Sponsor satisfaction score</li>
+              <li>Cross-Union (Mainland ↔ ZNZ) activity ratio</li>
+            </ul>
+          </div>
+        </div>
+        <div class="phase-kpi">
+          <div class="kpi-item"><div class="kpi-num">10,000</div><div class="kpi-label">Registered youth</div></div>
+          <div class="kpi-item"><div class="kpi-num">3</div><div class="kpi-label">Sponsor partners</div></div>
+          <div class="kpi-item"><div class="kpi-num">60%</div><div class="kpi-label">Target: monthly active rate</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="phase phase-2">
+      <div class="phase-time">Months<br>7–18</div>
+      <div class="phase-dot"></div>
+      <div class="phase-content">
+        <div class="phase-header">
+          <span class="phase-badge">Phase 2</span>
+          <span class="phase-title">Growth — National Rollout</span>
+        </div>
+        <p style="font-size:13px;color:var(--ink-light);margin-bottom:1rem;">All regions of Mainland and Zanzibar. Mobile app launched. Employer marketplace opens. Revenue becomes self-sustaining.</p>
+        <div class="phase-grid">
+          <div>
+            <div class="phase-col-label">Build</div>
+            <ul class="phase-items">
+              <li>Android + iOS app with wallet UI</li>
+              <li>Employer API — post jobs, verify hires</li>
+              <li>Cross-Union job board (Ajira marketplace)</li>
+              <li>University & VETA institution integrations</li>
+              <li>15+ earn actions, 10+ redeem options</li>
+              <li>Real-time analytics for VPO & partners</li>
+            </ul>
+          </div>
+          <div>
+            <div class="phase-col-label">Partnerships</div>
+            <ul class="phase-items">
+              <li>Vodacom, Airtel, TTCL (telco sponsors)</li>
+              <li>CRDB, NMB, NBC (banking rewards)</li>
+              <li>TAIFA Stars, Bongo music promoters</li>
+              <li>VETA & UDSM credit integration</li>
+              <li>Tanzania Tourism Board (ferry/travel)</li>
+              <li>10+ employer partners (cross-Union)</li>
+            </ul>
+          </div>
+        </div>
+        <div class="phase-kpi">
+          <div class="kpi-item"><div class="kpi-num">500K</div><div class="kpi-label">Registered youth</div></div>
+          <div class="kpi-item"><div class="kpi-num">20+</div><div class="kpi-label">Partner organisations</div></div>
+          <div class="kpi-item"><div class="kpi-num">TSh 2B+</div><div class="kpi-label">Annual sponsor revenue</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="phase phase-3">
+      <div class="phase-time">Months<br>19–30</div>
+      <div class="phase-dot"></div>
+      <div class="phase-content">
+        <div class="phase-header">
+          <span class="phase-badge">Phase 3</span>
+          <span class="phase-title">Intelligence — AI & Open Platform</span>
+        </div>
+        <p style="font-size:13px;color:var(--ink-light);margin-bottom:1rem;">Platform opens to third-party developers. AI matching engine connects youth to opportunities. Data becomes Tanzania's youth economic intelligence layer.</p>
+        <div class="phase-grid">
+          <div>
+            <div class="phase-col-label">Build</div>
+            <ul class="phase-items">
+              <li>AI-powered job & skills match engine</li>
+              <li>Open API for NGOs, universities, employers</li>
+              <li>Personalised earning pathway recommendations</li>
+              <li>Points lending — earn now, redeem future</li>
+              <li>Cross-Union cultural challenge campaigns</li>
+            </ul>
+          </div>
+          <div>
+            <div class="phase-col-label">Intelligence</div>
+            <ul class="phase-items">
+              <li>National Youth Skills Index (published quarterly)</li>
+              <li>VPO policy dashboard — real-time engagement data</li>
+              <li>Employer talent pipeline visibility</li>
+              <li>Union sentiment tracking by region/age/gender</li>
+            </ul>
+          </div>
+        </div>
+        <div class="phase-kpi">
+          <div class="kpi-item"><div class="kpi-num">2M+</div><div class="kpi-label">Registered youth</div></div>
+          <div class="kpi-item"><div class="kpi-num">50+</div><div class="kpi-label">Third-party integrations</div></div>
+          <div class="kpi-item"><div class="kpi-num">TSh 8B+</div><div class="kpi-label">Annual platform revenue</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="phase phase-4">
+      <div class="phase-time">Months<br>31–36</div>
+      <div class="phase-dot"></div>
+      <div class="phase-content">
+        <div class="phase-header">
+          <span class="phase-badge">Phase 4</span>
+          <span class="phase-title">Export — The African Model</span>
+        </div>
+        <p style="font-size:13px;color:var(--ink-light);margin-bottom:1rem;">Tanzania licenses the Umoja Points model to other EAC nations. Platform becomes a regional infrastructure play. VPO becomes a continental thought leader on youth civic tech.</p>
+        <div class="phase-grid">
+          <div>
+            <div class="phase-col-label">Expand</div>
+            <ul class="phase-items">
+              <li>EAC youth passport integration</li>
+              <li>Rwanda, Kenya, Uganda pilot partnerships</li>
+              <li>AU youth engagement framework alignment</li>
+              <li>Regional employer marketplace</li>
+            </ul>
+          </div>
+          <div>
+            <div class="phase-col-label">Legacy</div>
+            <ul class="phase-items">
+              <li>Tanzania as the model for civic youth tech in Africa</li>
+              <li>VPO recognised globally as innovation leader</li>
+              <li>Self-sustaining revenue with no govt subsidy needed</li>
+              <li>5M+ youth on one national platform</li>
+            </ul>
+          </div>
+        </div>
+        <div class="phase-kpi">
+          <div class="kpi-item"><div class="kpi-num">5M+</div><div class="kpi-label">Total youth registered</div></div>
+          <div class="kpi-item"><div class="kpi-num">3+</div><div class="kpi-label">Countries on the platform</div></div>
+          <div class="kpi-item"><div class="kpi-num">TSh 20B+</div><div class="kpi-label">Annual platform revenue</div></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- BUSINESS MODEL -->
+<section id="business">
+  <div class="section-label">04 — Business Model</div>
+  <h2>Revenue without government funding</h2>
+  <p class="section-intro">VPO provides the mandate and the trust. Private sector provides the money. Youth provide the engagement. Everyone wins.</p>
+  <div class="biz-grid">
+
+    <div class="biz-card featured">
+      <div>
+        <h3>The Core Logic</h3>
+        <p>Tanzania has 12M+ youth with no unified engagement platform. Every telco, bank, employer, and entertainer wants access to this audience. VPO has the mandate to reach them. Umoja Points is the bridge — and the bridge charges a toll.</p>
+      </div>
+      <div class="sponsor-tiers">
+        <div class="tier gold">
+          <div>
+            <div class="tier-name">🥇 Dhahabu Partner</div>
+            <div class="tier-perks">Exclusive category sponsor + co-branded campaigns + data access</div>
+          </div>
+          <div class="tier-val">TSh 400M/yr</div>
+        </div>
+        <div class="tier silver">
+          <div>
+            <div class="tier-name">🥈 Fedha Partner</div>
+            <div class="tier-perks">Reward funding + platform placement + quarterly reports</div>
+          </div>
+          <div class="tier-val">TSh 150M/yr</div>
+        </div>
+        <div class="tier bronze">
+          <div>
+            <div class="tier-name">🥉 Shaba Partner</div>
+            <div class="tier-perks">Reward contribution + basic analytics + logo visibility</div>
+          </div>
+          <div class="tier-val">TSh 50M/yr</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="biz-card">
+      <h3>Year 1–2 Revenue Streams</h3>
+      <p class="biz-desc">Pilot through national rollout. Conservative estimates based on 3 Dhahabu + 8 Fedha + 15 Shaba partners.</p>
+      <div class="revenue-streams">
+        <div class="stream"><span class="stream-name">Dhahabu sponsorships (×3)</span><span class="stream-amount">TSh 1.2B</span></div>
+        <div class="stream"><span class="stream-name">Fedha sponsorships (×8)</span><span class="stream-amount">TSh 1.2B</span></div>
+        <div class="stream"><span class="stream-name">Shaba sponsorships (×15)</span><span class="stream-amount">TSh 750M</span></div>
+        <div class="stream"><span class="stream-name">Employer API access fees</span><span class="stream-amount">TSh 200M</span></div>
+        <div class="stream"><span class="stream-name">Campaign activation fees</span><span class="stream-amount">TSh 300M</span></div>
+      </div>
+      <div class="revenue-total">
+        <span class="revenue-total-label">Year 2 Annual Revenue</span>
+        <span class="revenue-total-num">TSh 3.65B</span>
+      </div>
+    </div>
+
+    <div class="biz-card">
+      <h3>Year 3–4 Revenue Streams</h3>
+      <p class="biz-desc">Open API + AI platform era. Data intelligence and third-party integrations open new revenue lines.</p>
+      <div class="revenue-streams">
+        <div class="stream"><span class="stream-name">Platinum + Gold sponsorships</span><span class="stream-amount">TSh 5B</span></div>
+        <div class="stream"><span class="stream-name">Open API licensing (per-call)</span><span class="stream-amount">TSh 800M</span></div>
+        <div class="stream"><span class="stream-name">Youth Skills Index data reports</span><span class="stream-amount">TSh 400M</span></div>
+        <div class="stream"><span class="stream-name">EAC platform licensing fees</span><span class="stream-amount">TSh 1.5B</span></div>
+        <div class="stream"><span class="stream-name">Premium employer matching</span><span class="stream-amount">TSh 600M</span></div>
+      </div>
+      <div class="revenue-total">
+        <span class="revenue-total-label">Year 4 Annual Revenue</span>
+        <span class="revenue-total-num">TSh 8.3B</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- STAKEHOLDERS -->
+<section style="background:var(--cream);">
+  <div class="section-label">05 — Stakeholder Value</div>
+  <h2>Everyone wins something different</h2>
+  <p class="section-intro">The system works because each player gets what they actually want — not what they're told to want.</p>
+  <div class="stake-grid">
+    <div class="stake-card">
+      <div class="stake-num">01</div>
+      <h3>Vijana (Youth)</h3>
+      <p>They came for burudani. They stay for ajira. They leave with Union identity. The hook, value, and meaning are layered intentionally.</p>
+      <ul class="stake-gets">
+        <li>Real rewards for things they're already doing</li>
+        <li>A fast-track into jobs, not just applications</li>
+        <li>Subsidised education and travel</li>
+        <li>A civic identity they're proud of, not forced into</li>
+        <li>Cross-Union opportunities they couldn't see before</li>
+      </ul>
+    </div>
+    <div class="stake-card">
+      <div class="stake-card" style="border:none;padding:0;">
+      <div class="stake-num">02</div>
+      <h3>VPO / Government</h3>
+      <p>Finally, a platform that makes the Union tangible for the generation that has never known what it means to be part of it.</p>
+      <ul class="stake-gets">
+        <li>Real-time data on youth Union engagement</li>
+        <li>A policy tool, not just a communications campaign</li>
+        <li>Zero cost to government — fully sponsor-funded</li>
+        <li>Cross-Union economic flow that didn't exist before</li>
+        <li>Global recognition as civic tech innovator</li>
+      </ul>
+      </div>
+    </div>
+    <div class="stake-card">
+      <div class="stake-num">03</div>
+      <h3>Wadhifa (Employers)</h3>
+      <p>Access to a pre-vetted, civic-minded youth talent pool — something no recruitment agency can offer them.</p>
+      <ul class="stake-gets">
+        <li>Reach 500K–5M engaged youth in one platform</li>
+        <li>Pre-screened candidates with verified civic records</li>
+        <li>Cross-Union talent they couldn't find before</li>
+        <li>Employer brand built on national youth platform</li>
+        <li>CSR + recruitment combined in one spend</li>
+      </ul>
+    </div>
+    <div class="stake-card">
+      <div class="stake-num">04</div>
+      <h3>Makampuni (Sponsors)</h3>
+      <p>The most valuable youth audience in Tanzania, validated by government, in one place. There's no comparable buy in any media plan.</p>
+      <ul class="stake-gets">
+        <li>Government-backed brand association</li>
+        <li>First-party youth data (with consent)</li>
+        <li>Product trial and onboarding through rewards</li>
+        <li>Category exclusivity at Dhahabu tier</li>
+        <li>Co-branded Union campaigns at national scale</li>
+      </ul>
+    </div>
+    <div class="stake-card">
+      <div class="stake-num">05</div>
+      <h3>Wasanii (Artists & Culture)</h3>
+      <p>Bongo Flava, ngoma, theatre, sport — culture is the language youth speak. Artists become civic collaborators, not just performers.</p>
+      <ul class="stake-gets">
+        <li>Government-backed platform for event promotion</li>
+        <li>Ticket revenue from points redemptions</li>
+        <li>New fan acquisition from engaged youth base</li>
+        <li>Cross-Union audience (Mainland + Zanzibar artists)</li>
+        <li>Cultural campaign partnership fees</li>
+      </ul>
+    </div>
+    <div class="stake-card">
+      <div class="stake-num">06</div>
+      <h3>Vyuo / VETA (Education)</h3>
+      <p>Universities and vocational training institutions get a direct pipeline of motivated, points-earning students who arrived through civic action.</p>
+      <ul class="stake-gets">
+        <li>Enrolment pipeline of motivated students</li>
+        <li>Integration with national skills data index</li>
+        <li>Reduced dropout through HESLB top-up incentives</li>
+        <li>Employer connection through platform marketplace</li>
+        <li>Cross-Union student mobility facilitation</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- TECH STACK -->
+<section id="tech">
+  <div class="section-label">06 — Technology Architecture</div>
+  <h2>Built for Tanzania, not Silicon Valley</h2>
+  <p class="section-intro">Mobile-first, USSD-capable, offline-tolerant. Designed for Tanzanian infrastructure reality — then scaled up from there.</p>
+  <div class="tech-stack">
+    <div class="tech-layer">
+      <div class="tech-layer-label">User Layer</div>
+      <h4>Access</h4>
+      <ul class="tech-list">
+        <li>USSD (*150#) — feature phones</li>
+        <li>Android app (Swahili-first UI)</li>
+        <li>iOS app</li>
+        <li>Web portal</li>
+        <li>WhatsApp chatbot (Phase 2)</li>
+      </ul>
+    </div>
+    <div class="tech-layer">
+      <div class="tech-layer-label">Identity Layer</div>
+      <h4>Trust</h4>
+      <ul class="tech-list">
+        <li>NIDA integration (Mainland)</li>
+        <li>Zanzibar NID integration</li>
+        <li>Biometric verification</li>
+        <li>Anti-fraud engine</li>
+        <li>Consent management</li>
+      </ul>
+    </div>
+    <div class="tech-layer">
+      <div class="tech-layer-label">Platform Layer</div>
+      <h4>Engine</h4>
+      <ul class="tech-list">
+        <li>Points ledger (immutable)</li>
+        <li>Action verification APIs</li>
+        <li>Reward redemption engine</li>
+        <li>Partner integration hub</li>
+        <li>Open API (Phase 3)</li>
+      </ul>
+    </div>
+    <div class="tech-layer">
+      <div class="tech-layer-label">Intelligence Layer</div>
+      <h4>Data</h4>
+      <ul class="tech-list">
+        <li>VPO policy dashboard</li>
+        <li>National Youth Skills Index</li>
+        <li>Sponsor analytics portal</li>
+        <li>AI job-matching (Phase 3)</li>
+        <li>Union sentiment tracker</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- RISK -->
+<section style="background:var(--cream);">
+  <div class="section-label">07 — Risk & Mitigation</div>
+  <h2>Know the risks. Own the answers.</h2>
+  <p class="section-intro">Every strong idea has risks. Here's what they are and exactly how we handle them.</p>
+  <div class="risk-grid">
+    <div class="risk-card high">
+      <div class="risk-label">High — Political</div>
+      <div class="risk-title">Union politics derail cross-side features</div>
+      <div class="risk-mitigation">Mitigation: VPO is already the constitutional home of Union coordination. Build the platform under their mandate. Engage Zanzibar government as co-owner, not beneficiary.</div>
+    </div>
+    <div class="risk-card high">
+      <div class="risk-label">High — Adoption</div>
+      <div class="risk-title">Youth don't sign up or don't stay active</div>
+      <div class="risk-mitigation">Mitigation: Lead with burudani, not civic content. First reward must be redeemable within 2 weeks of joining. Ambassador programme — 1,000 campus and mtaa youth leaders as evangelists.</div>
+    </div>
+    <div class="risk-card med">
+      <div class="risk-label">Medium — Technology</div>
+      <div class="risk-title">USSD / mobile infrastructure gaps in rural areas</div>
+      <div class="risk-mitigation">Mitigation: Phase 1 is urban only. USSD ensures no smartphone dependency. Offline point-earning at physical partner locations (schools, VETA centres, community centres).</div>
+    </div>
+    <div class="risk-card med">
+      <div class="risk-label">Medium — Commercial</div>
+      <div class="risk-title">Sponsors don't renew after Year 1</div>
+      <div class="risk-mitigation">Mitigation: Lock 18-month minimum contracts at Dhahabu tier. Share monthly engagement reports proving ROI. First pilot cohort provides proof-of-concept data before renewals are due.</div>
+    </div>
+    <div class="risk-card low">
+      <div class="risk-label">Low — Fraud</div>
+      <div class="risk-title">Youth game the system for points without real civic action</div>
+      <div class="risk-mitigation">Mitigation: NIDA-verified identity prevents duplicate accounts. High-value actions (jobs, training) are partner-verified. AI fraud detection in Phase 2.</div>
+    </div>
+    <div class="risk-card low">
+      <div class="risk-label">Low — Privacy</div>
+      <div class="risk-title">Youth data misuse or breach</div>
+      <div class="risk-mitigation">Mitigation: Data stays sovereign in Tanzania. VPO is the data custodian. Sponsors get aggregate insights, not individual profiles. Consent is explicit and revocable at any time.</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Umoja <em>Points</em></div>
+  <div class="footer-tagline">Kuwa Mtanzania — inapata thamani.</div>
+  <p>Prepared for the Office of the Vice President, United Republic of Tanzania · 2025 · Confidential</p>
+</footer>
+
+</body>
+</html>
